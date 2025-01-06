@@ -2,7 +2,7 @@ pipeline{
 agent any
 
     
-stages{
+
     stages {
         stage('TEST') {
             steps {
@@ -14,7 +14,7 @@ stages{
 
                 }
             }
-        }
+        
 
 }
 }
