@@ -3,6 +3,7 @@ agent any
 
     
 // adding credentials
+// ggg
     environment {
     GITHUB_CREDENTIALS = 'github-credentials'
                 MAVEN_REPO_USERNAME = credentials('github-credentials')  // Replace with your actual Jenkins credential ID
