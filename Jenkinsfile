@@ -3,7 +3,9 @@ agent any
 
     
 
-    
+    environment {
+    GITHUB_CREDENTIALS = 'github-credentials'
+}
     
     
     stages {
