@@ -10,6 +10,7 @@ stages{
                     sh './gradlew test'
 
 
+
                 }
             }
         }
