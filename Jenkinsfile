@@ -6,31 +6,34 @@ agent any
 
     
     stages {
-        stage('TEST') {
+
+        stage('test') {
             steps {
                 script {
-                    echo 'Running tests.....'
+                    echo 'Tests en cours.....'
                     sh './gradlew test'
 
                 }
 
 
                 }
-                                post {
-                                    always {
-                                        cucumber '**/reports/*.json'
+                post {
+                    always {
+                        cucumber '**/reports/*.json'
 
-                                    }
+                    }
             }
 
 }
 
-        stage('CODEANALYSIS') {
+
+
+        stage('AnalyseCode') {
 
 
             steps {
                 script {
-                    echo 'Running SonarQube analysis...'
+                    echo 'Analyse Sonarqube en cours...'
                     withSonarQubeEnv('sonar') {
                         sh './gradlew sonarqube'
                     }
@@ -38,56 +41,56 @@ agent any
             }
         }
 
-      stage('CODEQUALITY') {
+
+
+      stage('QualityGate') {
                              steps {
                                 script {
-                                    echo 'Checking SonarQube Quality Gate...'
+                                    echo 'SonarQube Quality Gate Test en cours...'
                                    def qualityGate = waitForQualityGate()
                                      if (qualityGate.status != 'OK') {
-                                         error "SonarQube Quality Gate failed: ${qualityGate.status}"
+                                         error "echec dans SonarQube Quality Gate : ${qualityGate.status}"
                                     }
                                 }
                             }
                         }
 
 
-                        stage('BUILD') {
+                        stage('Build') {
                             steps {
                                 script {
-                                    echo 'Building the project...'
+                                    echo 'Build du projet...'
 
                                     sh './gradlew build'
                                 }
                             }
                         }
 
-                        stage('Archive Artifacts') {
+                        stage('ArchiverArtifacts') {
                             steps {
 
                                 archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
-
                                 archiveArtifacts artifacts: 'build/reports/tests/**/*', fingerprint: true
-
                                 archiveArtifacts artifacts: 'build/reports/cucumber/**/*', fingerprint: true
                             }
                         }
 
 
 
-                                stage('DEPLOY') {
+                                stage('Deploy') {
                                     steps {
                                         script {
-                                            echo 'Deploying the application...'
+                                            echo 'Deploiement de le application...'
                                             sh './gradlew publish'
                                         }
                                     }
                                 }
 
 
-                                stage('NOTIFYEMAIL') {
+                                stage('NotifEmail') {
                                     steps {
                                         script {
-                                            echo 'Sending email notification...'
+                                            echo 'Nnotification Email envoye...'
 
                                             sh './gradlew sendMail'
 
@@ -111,13 +114,9 @@ agent any
                                 }
 
 
-                        stage('NOTIFYSLACK') {
+                        stage('NotifSlack') {
                                     steps {
-                                        // script {
-                                        //     echo 'Sending message notification with slack...'
-                                        //     // Call Gradle sendMail task
-                                        //     sh 'gradle notifySlack'
-                                        // }
+
                                         slackSend channel: '#ogl-project',
                                             color: 'good',
                                             message: ':rocket: *Deploiement termine avec succes!* :tada:'
