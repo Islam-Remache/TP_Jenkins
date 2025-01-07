@@ -50,7 +50,7 @@ agent any
                                 }
 
 
-                                stage('NOTIFY') {
+                                stage('NOTIFYEMAIL') {
                                     steps {
                                         script {
                                             echo 'Sending email notification...'
@@ -77,7 +77,7 @@ agent any
                                 }
 
 
-                             stage('NOTIFY') {
+                             stage('NOTIFYSLACK') {
                                     steps {
                                         script {
                                             echo 'Sending slack notification...'
