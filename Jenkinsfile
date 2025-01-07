@@ -77,19 +77,18 @@ agent any
                                 }
 
 
-                             stage('NOTIFYSLACK') {
+                        stage('NOTIFYSLACK') {
                                     steps {
-                                        script {
-                                            echo 'Sending slack notification...'
-
-
-
-
-
-
-
-                                        }
+                                        // script {
+                                        //     echo 'Sending message notification with slack...'
+                                        //     // Call Gradle sendMail task
+                                        //     sh 'gradle notifySlack'
+                                        // }
+                                        slackSend channel: '#web-app',
+                                            color: 'good',
+                                            message: ':rocket: *Deploiement termine avec succes!* :tada:'
                                     }
                                 }
+                            }
                             }
 }
