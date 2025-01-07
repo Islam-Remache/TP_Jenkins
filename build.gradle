@@ -7,7 +7,6 @@ plugins {
     id 'de.zebrajaeger.sendMail' version("0.1.1")
 
 }
-//test hh
 
 group = 'com.example'
 version = '1.0-SNAPSHOT'
