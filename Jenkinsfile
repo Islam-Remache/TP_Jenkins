@@ -84,7 +84,7 @@ agent any
                                         //     // Call Gradle sendMail task
                                         //     sh 'gradle notifySlack'
                                         // }
-                                        slackSend channel: '#web-app',
+                                        slackSend channel: '#ogl-project',
                                             color: 'good',
                                             message: ':rocket: *Deploiement termine avec succes!* :tada:'
                                     }
