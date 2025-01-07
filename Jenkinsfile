@@ -10,14 +10,11 @@ agent any
                     echo 'Running tests...'
                     sh './gradlew test'
 
-
-
                 }
             }
-        
 
 }
-}
+
 
 
 
