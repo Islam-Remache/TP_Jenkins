@@ -89,6 +89,6 @@ agent any
                                             message: ':rocket: *Deploiement termine avec succes!* :tada:'
                                     }
                                 }
-                            }
+
                             }
 }
