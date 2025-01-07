@@ -13,6 +13,12 @@ agent any
                     sh './gradlew test'
 
                 }
+
+                post {
+                    always {
+                        cucumber '**/reports/*.json'
+                    }
+                }
             }
 
 }
