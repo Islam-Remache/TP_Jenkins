@@ -17,6 +17,7 @@ agent any
                 post {
                     always {
                         cucumber '**/reports/*.json'
+
                     }
                 }
             }
