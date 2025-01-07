@@ -14,7 +14,16 @@ agent any
             }
 
 }
-
+        stage('CODEANALYSIS') {
+            steps {
+                script {
+                    echo 'Running SonarQube analysis...'
+                    withSonarQubeEnv('sonarQube') {
+                        sh './gradlew sonarqube'
+                    }
+                }
+            }
+        }
 
 
 
@@ -44,8 +53,8 @@ agent any
                                             echo 'Sending email notification...'
 
                                             sh './gradlew sendMail'
-                                            sh './gradlew notifySlack'
-                                            echo 'Sending email...'
+
+                                            /*echo 'Sending email...'
                                                         mail to: 'chatgpties210@gmail.com',
                                                              subject: "Jenkins Build: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                                                              body: """\
@@ -56,7 +65,23 @@ agent any
                                                              - Build Number: ${env.BUILD_NUMBER}
                                                              - Status: ${currentBuild.currentResult}
                                                              - URL: ${env.BUILD_URL}
-                                                             """
+                                                             """*/
+
+
+
+                                        }
+                                    }
+                                }
+
+
+                             stage('NOTIFY') {
+                                    steps {
+                                        script {
+                                            echo 'Sending slack notification...'
+
+
+
+
 
 
 
