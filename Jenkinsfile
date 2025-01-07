@@ -45,6 +45,18 @@ agent any
 
                                             sh './gradlew sendMail'
                                             sh './gradlew notifySlack'
+                                            echo 'Sending email...'
+                                                        mail to: 'chatgpties210@gmail.com',
+                                                             subject: "Jenkins Build: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                                                             body: """\
+                                                             The build has completed.
+
+                                                             Build Details:
+                                                             - Job: ${env.JOB_NAME}
+                                                             - Build Number: ${env.BUILD_NUMBER}
+                                                             - Status: ${currentBuild.currentResult}
+                                                             - URL: ${env.BUILD_URL}
+                                                             """
 
 
 
