@@ -14,12 +14,13 @@ agent any
 
                 }
 
-                post {
-                    always {
-                        cucumber '**/reports/*.json'
 
-                    }
                 }
+                                post {
+                                    always {
+                                        cucumber '**/reports/*.json'
+
+                                    }
             }
 
 }
