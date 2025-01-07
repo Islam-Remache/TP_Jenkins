@@ -47,6 +47,7 @@ agent any
                                             sh './gradlew notifySlack'
 
 
+
                                         }
                                     }
                                 }
