@@ -44,6 +44,9 @@ agent any
                                             echo 'Sending email notification...'
 
                                             sh './gradlew sendMail'
+                                            sh './gradlew notifySlack'
+
+
                                         }
                                     }
                                 }
